@@ -22,18 +22,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <!--<artifactId>auth-tree-node-parent</artifactId>-->
-        <artifactId>openam-auth-trees</artifactId>
+        <artifactId>auth-tree-node-parent</artifactId>
         <groupId>org.forgerock.am</groupId>
         <version>6.0.0</version>
     </parent>
 
-    <artifactId>social-authentiq-node</artifactId>
+    <artifactId>authentiq-auth-tree-nodes</artifactId>
 
     <groupId>com.authentiq</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-    <name>Template for an Auth Tree Node maven project</name>
+    <version>1.0.0</version>
+    <name>Authentiq Auth Tree Nodes</name>
     <description>An Authentication Tree Node for ForgeRock's Identity Platform</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <repositories>
         <repository>
@@ -52,61 +55,6 @@
             <artifactId>auth-node-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-guice-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-scripting</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-devices</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-monitoring-test-assertions</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>forgerock-test-utils</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-core</artifactId>
-            <type>test-jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-auth-hotp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-guice-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-push-notification</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>forgerock-oauth-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>oauth-oauth2-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-auth-common</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.forgerock.commons</groupId>
             <artifactId>forgerock-oauth-core</artifactId>
         </dependency>
@@ -115,105 +63,8 @@
             <artifactId>openam-auth-oauth2</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>webhook-endpoint</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>auth-node-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-guice-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-scripting</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-devices</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-monitoring-test-assertions</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>forgerock-test-utils</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-core</artifactId>
-            <type>test-jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-auth-hotp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-guice-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-push-notification</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>forgerock-oauth-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.forgerock.commons</groupId>
             <artifactId>oauth-oauth2-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-auth-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>forgerock-oauth-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-auth-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>webhook-endpoint</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>forgerock-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons.guava</groupId>
-            <artifactId>forgerock-guava-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-plugin-framework</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.servicemix.bundles</groupId>
-            <artifactId>org.apache.servicemix.bundles.javax-inject</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>openam-audit-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
-            <artifactId>auth-tree-node-parent</artifactId>
-            <version>6.0.0</version>
         </dependency>
     </dependencies>
 </project>
