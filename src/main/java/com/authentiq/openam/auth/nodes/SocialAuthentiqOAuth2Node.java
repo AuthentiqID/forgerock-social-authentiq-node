@@ -14,7 +14,8 @@
  * Copyright 2018 ForgeRock AS.
  */
 
-package com.authentiq.openam;
+package com.authentiq.openam.auth.nodes;
+
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonMap;
 import static org.forgerock.openam.auth.nodes.oauth.SocialOAuth2Helper.DEFAULT_OAUTH2_SCOPE_DELIMITER;
@@ -45,8 +46,8 @@ import com.sun.identity.sm.RequiredValueValidator;
  * The social authentiq node. Contains pre-populated configuration for authentiq.
  */
 @Node.Metadata(outcomeProvider = AbstractSocialAuthLoginNode.SocialAuthOutcomeProvider.class,
-        configClass = SocialAuthentiqNode.AuthentiqOAuth2Config.class)
-public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
+        configClass = SocialAuthentiqOAuth2Node.AuthentiqOAuth2Config.class)
+public class SocialAuthentiqOAuth2Node extends AbstractSocialAuthLoginNode {
 
     /**
      * The node config with default values for authentiq.
@@ -74,7 +75,7 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 300, validators = {RequiredValueValidator.class, URLValidator.class})
         default String authorizeEndpoint() {
-            return "https://accounts.google.com/o/oauth2/v2/auth";
+            return "https://connect.authentiq.io/sign-in";
         }
 
         /**
@@ -83,7 +84,7 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 400, validators = {RequiredValueValidator.class, URLValidator.class})
         default String tokenEndpoint() {
-            return "https://www.googleapis.com/oauth2/v4/token";
+            return "https://connect.authentiq.io/token";
         }
 
         /**
@@ -92,7 +93,7 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 500, validators = {RequiredValueValidator.class, URLValidator.class})
         default String userInfoEndpoint() {
-            return "https://www.googleapis.com/oauth2/v3/userinfo";
+            return "https://connect.authentiq.io/userinfo";
         }
 
         /**
@@ -101,7 +102,7 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 600, validators = {RequiredValueValidator.class})
         default String scopeString() {
-            return "profile email";
+            return "aq:name email phone address aq:push openid";
         }
 
         /**
@@ -119,7 +120,7 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 800)
         default String provider() {
-            return "authentiq";
+            return "Authentiq";
         }
 
         /**
@@ -187,8 +188,9 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
             attributeMappingConfiguration.put("sub", "iplanet-am-user-alias-list");
             attributeMappingConfiguration.put("given_name", "givenName");
             attributeMappingConfiguration.put("family_name", "sn");
-            attributeMappingConfiguration.put("email", "mail");
             attributeMappingConfiguration.put("name", "cn");
+            attributeMappingConfiguration.put("email", "mail");
+            attributeMappingConfiguration.put("phone_number", "telephoneNumber");
             return attributeMappingConfiguration;
         }
 
@@ -219,20 +221,20 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 1800)
         default String issuer() {
-            return "";
+            return "https://connect.authentiq.io/";
         }
     }
 
     /**
-     * Constructs a new {@link SocialAuthentiqNode} with the provided {@link Config}.
+     * Constructs a new {@link SocialAuthentiqOAuth2Node} with the provided {@link Config}.
      *
-     * @param config           provides the settings for initialising an {@link SocialAuthentiqNode}.
+     * @param config           provides the settings for initialising an {@link SocialAuthentiqOAuth2Node}.
      * @param authModuleHelper helper for oauth2
      * @param profileNormalizer User profile normaliser
      * @throws NodeProcessException if there is a problem during construction.
      */
     @Inject
-    public SocialAuthentiqNode(@Assisted AuthentiqOAuth2Config config, SocialOAuth2Helper authModuleHelper,
+    public SocialAuthentiqOAuth2Node(@Assisted AuthentiqOAuth2Config config, SocialOAuth2Helper authModuleHelper,
                             ProfileNormalizer profileNormalizer) throws NodeProcessException {
         super(config, authModuleHelper, authModuleHelper.newOAuthClient(getOAuthClientConfiguration(config)),
                 profileNormalizer);

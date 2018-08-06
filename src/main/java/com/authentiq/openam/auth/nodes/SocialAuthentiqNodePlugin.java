@@ -14,7 +14,7 @@
  * Copyright 2018 ForgeRock AS.
  */
 
-package com.authentiq.openam;
+package com.authentiq.openam.auth.nodes;
 
 import java.util.Collections;
 import java.util.Map;
@@ -73,7 +73,7 @@ public class SocialAuthentiqNodePlugin extends AbstractNodeAmPlugin {
 	@Override
 	protected Map<String, Iterable<? extends Class<? extends Node>>> getNodesByVersion() {
 		return Collections.singletonMap(SocialAuthentiqNodePlugin.currentVersion, 
-				Collections.singletonList(SocialAuthentiqNode.class));
+				Collections.singletonList(SocialAuthentiqOAuth2Node.class));
 	}
 
     /** 
