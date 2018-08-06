@@ -46,8 +46,8 @@ import com.sun.identity.sm.RequiredValueValidator;
  * The social authentiq node. Contains pre-populated configuration for authentiq.
  */
 @Node.Metadata(outcomeProvider = AbstractSocialAuthLoginNode.SocialAuthOutcomeProvider.class,
-        configClass = SocialAuthentiqOAuth2Node.AuthentiqOAuth2Config.class)
-public class SocialAuthentiqOAuth2Node extends AbstractSocialAuthLoginNode {
+        configClass = SocialAuthentiqNode.AuthentiqOAuth2Config.class)
+public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
 
     /**
      * The node config with default values for authentiq.
@@ -102,7 +102,7 @@ public class SocialAuthentiqOAuth2Node extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 600, validators = {RequiredValueValidator.class})
         default String scopeString() {
-            return "aq:name email phone address aq:push openid";
+            return "openid profile email~s phone~s address aq:push";
         }
 
         /**
@@ -120,12 +120,12 @@ public class SocialAuthentiqOAuth2Node extends AbstractSocialAuthLoginNode {
          */
         @Attribute(order = 800)
         default String provider() {
-            return "Authentiq";
+            return "authentiq";
         }
 
         /**
          * The authentication id key.
-         * @return teh authentication id key.
+         * @return the authentication id key.
          */
         @Attribute(order = 900, validators = {RequiredValueValidator.class})
         default String authenticationIdKey() {
@@ -191,6 +191,8 @@ public class SocialAuthentiqOAuth2Node extends AbstractSocialAuthLoginNode {
             attributeMappingConfiguration.put("name", "cn");
             attributeMappingConfiguration.put("email", "mail");
             attributeMappingConfiguration.put("phone_number", "telephoneNumber");
+            attributeMappingConfiguration.put("locale", "preferredlocale");
+            attributeMappingConfiguration.put("zoneinfo", "preferredtimezone");
             return attributeMappingConfiguration;
         }
 
@@ -226,16 +228,16 @@ public class SocialAuthentiqOAuth2Node extends AbstractSocialAuthLoginNode {
     }
 
     /**
-     * Constructs a new {@link SocialAuthentiqOAuth2Node} with the provided {@link Config}.
+     * Constructs a new {@link SocialAuthentiqNode} with the provided {@link Config}.
      *
-     * @param config           provides the settings for initialising an {@link SocialAuthentiqOAuth2Node}.
+     * @param config           provides the settings for initialising an {@link SocialAuthentiqNode}.
      * @param authModuleHelper helper for oauth2
      * @param profileNormalizer User profile normaliser
      * @throws NodeProcessException if there is a problem during construction.
      */
     @Inject
-    public SocialAuthentiqOAuth2Node(@Assisted AuthentiqOAuth2Config config, SocialOAuth2Helper authModuleHelper,
-                            ProfileNormalizer profileNormalizer) throws NodeProcessException {
+    public SocialAuthentiqNode(@Assisted AuthentiqOAuth2Config config, SocialOAuth2Helper authModuleHelper,
+                               ProfileNormalizer profileNormalizer) throws NodeProcessException {
         super(config, authModuleHelper, authModuleHelper.newOAuthClient(getOAuthClientConfiguration(config)),
                 profileNormalizer);
     }

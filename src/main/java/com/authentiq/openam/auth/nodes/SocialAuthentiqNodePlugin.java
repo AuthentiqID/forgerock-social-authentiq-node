@@ -73,7 +73,7 @@ public class SocialAuthentiqNodePlugin extends AbstractNodeAmPlugin {
 	@Override
 	protected Map<String, Iterable<? extends Class<? extends Node>>> getNodesByVersion() {
 		return Collections.singletonMap(SocialAuthentiqNodePlugin.currentVersion, 
-				Collections.singletonList(SocialAuthentiqOAuth2Node.class));
+				Collections.singletonList(SocialAuthentiqNode.class));
 	}
 
     /** 
