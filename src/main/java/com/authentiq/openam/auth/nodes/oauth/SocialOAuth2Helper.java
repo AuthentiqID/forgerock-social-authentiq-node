@@ -61,7 +61,7 @@ public class SocialOAuth2Helper {
      */
     public static final String USER_NAMES_SHARED_STATE_KEY = "userNames";
 
-    /**
+    /**authenticationIdKey
      * Key to store and access the user attributes data in the shared state.
      */
     public static final String ATTRIBUTES_SHARED_STATE_KEY = "attributes";
