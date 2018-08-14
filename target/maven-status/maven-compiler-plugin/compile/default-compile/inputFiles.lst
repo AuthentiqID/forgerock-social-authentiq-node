@@ -1,7 +1,0 @@
-/project/src/main/java/com/authentiq/openam/auth/nodes/SocialAuthentiqNodePlugin.java
-/project/src/main/java/com/authentiq/openam/auth/nodes/SocialAuthentiqOAuth2Node.java
-/project/src/main/java/com/authentiq/openam/auth/nodes/oauth/AbstractSocialAuthLoginNode.java
-/project/src/main/java/com/authentiq/openam/auth/nodes/oauth/package-info.java
-/project/src/main/java/com/authentiq/openam/auth/nodes/oauth/ProfileNormalizer.java
-/project/src/main/java/com/authentiq/openam/auth/nodes/oauth/SharedStateAdaptor.java
-/project/src/main/java/com/authentiq/openam/auth/nodes/oauth/SocialOAuth2Helper.java
