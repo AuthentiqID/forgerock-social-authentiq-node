@@ -21,6 +21,7 @@ import static java.util.Collections.singletonMap;
 import static org.forgerock.openam.auth.nodes.oauth.SocialOAuth2Helper.DEFAULT_OAUTH2_SCOPE_DELIMITER;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +49,8 @@ import com.sun.identity.sm.RequiredValueValidator;
 @Node.Metadata(outcomeProvider = AbstractSocialAuthLoginNode.SocialAuthOutcomeProvider.class,
         configClass = SocialAuthentiqNode.AuthentiqOAuth2Config.class)
 public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
+    public static final String AUTH_ID_KEY = "sub";
+    public static final Boolean USE_BASIC_AUTH = true;
 
     /**
      * The node config with default values for authentiq.
@@ -68,33 +71,6 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
         @Attribute(order = 200, validators = {RequiredValueValidator.class})
         @Password
         char[] clientSecret();
-
-        /**
-         * The authorization endpoint.
-         * @return The authorization endpoint.
-         */
-        @Attribute(order = 300, validators = {RequiredValueValidator.class, URLValidator.class})
-        default String authorizeEndpoint() {
-            return "https://connect.authentiq.io/sign-in";
-        }
-
-        /**
-         * The token endpoint.
-         * @return The token endpoint.
-         */
-        @Attribute(order = 400, validators = {RequiredValueValidator.class, URLValidator.class})
-        default String tokenEndpoint() {
-            return "https://connect.authentiq.io/token";
-        }
-
-        /**
-         * The userinfo endpoint.
-         * @return the userinfo endpoint.
-         */
-        @Attribute(order = 500, validators = {RequiredValueValidator.class, URLValidator.class})
-        default String userInfoEndpoint() {
-            return "https://connect.authentiq.io/userinfo";
-        }
 
         /**
          * The scopes to request.
@@ -121,24 +97,6 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
         @Attribute(order = 800)
         default String provider() {
             return "authentiq";
-        }
-
-        /**
-         * The authentication id key.
-         * @return the authentication id key.
-         */
-        @Attribute(order = 900, validators = {RequiredValueValidator.class})
-        default String authenticationIdKey() {
-            return "sub";
-        }
-
-        /**
-         * Tells if oauth2 must identify via basic header or not.
-         * @return true to authenticate via basic header, false otherwise.
-         */
-        @Attribute(order = 1000)
-        default boolean basicAuth() {
-            return true;
         }
 
         /**
@@ -212,7 +170,6 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
          *
          * @return true to activate it , false otherwise
          */
-        @Attribute(order = 1700)
         default boolean cfgMixUpMitigation() {
             return false;
         }
@@ -242,18 +199,27 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
                 profileNormalizer);
     }
 
-    private static OAuthClientConfiguration getOAuthClientConfiguration(AuthentiqOAuth2Config config) {
+    private static OAuthClientConfiguration getOAuthClientConfiguration(AuthentiqOAuth2Config config) throws NodeProcessException {
+
+        URI baseURI;
+
+        try {
+            baseURI = new URI(config.issuer());
+        } catch (URISyntaxException e) {
+            throw new NodeProcessException("Invalid Authentiq base URL.", e);
+        }
+
         return OAuth2ClientConfiguration.oauth2ClientConfiguration()
                 .withClientId(config.clientId())
                 .withClientSecret(new String(config.clientSecret()))
-                .withAuthorizationEndpoint(config.authorizeEndpoint())
-                .withTokenEndpoint(config.tokenEndpoint())
+                .withAuthorizationEndpoint(baseURI.resolve("/sign-in").toString())
+                .withTokenEndpoint(baseURI.resolve("/token").toString())
                 .withScope(Collections.singletonList(config.scopeString()))
                 .withScopeDelimiter(DEFAULT_OAUTH2_SCOPE_DELIMITER)
-                .withBasicAuth(config.basicAuth())
-                .withUserInfoEndpoint(config.userInfoEndpoint())
+                .withBasicAuth(USE_BASIC_AUTH)
+                .withUserInfoEndpoint(baseURI.resolve("/userinfo").toString())
                 .withRedirectUri(URI.create(config.redirectURI()))
                 .withProvider(config.provider())
-                .withAuthenticationIdKey(config.authenticationIdKey()).build();
+                .withAuthenticationIdKey(AUTH_ID_KEY).build();
     }
 }
