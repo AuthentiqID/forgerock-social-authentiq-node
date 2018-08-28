@@ -27,17 +27,21 @@ To enable sign in with Authentiq:
 - Obtain a `client_id` and `client_secret` for your application from the [Authentiq Dashbard](https://dashboard.authentiq.com/).
 - Add the **Social Authentiq** node to an Auth Tree.  
 - Attach the **Provision Dynamic Account** node to the **No account exists** connector as follows.
+
   ![Authentiq Social Auth Tree Node](./images/authentiq-auth-tree-example.png)
+
 - In the **Social Authentiq** node's properties, fill out the `client_id` and `client_secret` you obtained above. You can likely leave the other fields at their defaults.
 - Save the Auth Tree.
 
 # Usage
 
-To test your authentication flow...
+To test your authentication flow:
 
 - Navigate to the sign-in page of the authentication tree, e.g. `https://openam.partner.com:8080/openam/XUI/#login&service=MyAuthentiqTree`.
 - You will be redirected to the Authentiq sign-in page.
+
   ![Authentiq Provider](./images/authentiq-provider.png)
+
 - Sign in with your Authentiq ID, installing it as you go if needed.
 
 # Future
