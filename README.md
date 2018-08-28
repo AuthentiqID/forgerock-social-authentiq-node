@@ -1,43 +1,51 @@
-<!--
- * The contents of this file are subject to the terms of the Common Development and
- * Distribution License (the License). You may not use this file except in compliance with the
- * License.
- *
- * You can obtain a copy of the License at legal/CDDLv1.0.txt. See the License for the
- * specific language governing permission and limitations under the License.
- *
- * When distributing Covered Software, include this CDDL Header Notice in each file and include
- * the License file at legal/CDDLv1.0.txt. If applicable, add the following below the CDDL
- * Header, with the fields enclosed by brackets [] replaced by your own identifying
- * information: "Portions copyright [year] [name of copyright owner]".
- *
- * Copyright ${data.get('yyyy')} ForgeRock AS.
--->
-# Social Authentiq Authentication Node
+A passwordless authentication node for ForgeRock's Identity Platform, based on [Authentiq](https://www.authentiq.com/?utm_source=github&utm_medium=readme&utm_campaign=forgerock-social-authentiq).
 
-An authentication node for ForgeRock's Identity Platform that protects the login process with Authentiq.
+# Introduction
 
+[Authentiq](https://www.authentiq.com/?utm_source=github&utm_medium=readme&utm_campaign=forgerock-social-authentiq) is a simple passwordless authentication solution to protect your applications. But why not also hook Authentiq to your enterprise applications via ForgeRock...
 
-**BUILD**
+# Installation
 
-Copy the .jar file from the ../target directory into the ../web-container/webapps/openam/WEB-INF/lib directory where AM is deployed.  Restart the web container to pick up the new node. The node will then appear in the authentication trees components palette.
+## From JAR
 
+Download the [latest pre-built JAR file](https://github.com/AuthentiqID/forgerock-social-authentiq-node/releases/latest) from this repository and copy it into the `tomcat/webapps/openam/WEB-INF/lib` directory of your OpenAM deployment.
 
-**INSTALLATION**
+Restart the web container, after which the node will be available as an authentication tree component.
 
-The code in this repository has binary dependencies that live in the ForgeRock maven repository. Maven can be configured to authenticate to this repository by following the following [ForgeRock Knowledge Base Article](https://backstage.forgerock.com/knowledge/kb/article/a74096897).
+## From source
 
+Clone this repository, then run `mvn package` to build a local JAR file. 
 
-**USAGE**
+Copy the `.jar` file from the `../target` directory into the `tomcat/webapps/openam/WEB-INF/lib` directory of your OpenAM deployment. 
 
-![Authentiq Tree Node](./images/authentiq-tree-nodes.png)
-![Authentiq Provider](./images/authentiq-provider.png)
+Restart the web container, after which the node will be available as an authentication tree component.
 
+# Configuration
 
-**DISCLAIMER**
+To enable sign in with Authentiq:
 
-The sample code described herein is provided on an "as is" basis, without warranty of any kind, to the fullest extent permitted by law. ForgeRock does not warrant or guarantee the individual success developers may have in implementing the sample code on their development platforms or in production configurations.
+- Obtain a `client_id` and `client_secret` for your application from the [Authentiq Dashbard](https://dashboard.authentiq.com/).
+- Add the **Social Authentiq** node to an Auth Tree.  
+- Attach the **Provision Dynamic Account** node to the **No account exists** connector as follows.
+  ![Authentiq Social Auth Tree Node](./images/authentiq-auth-tree-example.png)
+- In the **Social Authentiq** node's properties, fill out the `client_id` and `client_secret` you obtained above. You can likely leave the other fields at their defaults.
+- Save the Auth Tree.
 
-ForgeRock does not warrant, guarantee or make any representations regarding the use, results of use, accuracy, timeliness or completeness of any data or information relating to the sample code. ForgeRock disclaims all warranties, expressed or implied, and in particular, disclaims all warranties of merchantability, and warranties related to the code, or any service or software related thereto.
+# Usage
 
-ForgeRock shall not be liable for any direct, indirect or consequential damages or costs of any type arising out of any action taken by you or others related to the sample code.
+To test your authentication flow...
+
+- Navigate to the sign-in page of the authentication tree, e.g. `https://openam.partner.com:8080/openam/XUI/#login&service=MyAuthentiqTree`.
+- You will be redirected to the Authentiq sign-in page.
+  ![Authentiq Provider](./images/authentiq-provider.png)
+- Sign in with your Authentiq ID, installing it as you go if needed.
+
+# Future
+
+- Whitelist users by domain.
+- Update user profiles on subsequent logins (should become possible in OpenAM v6.5).
+- Remote sign-out.
+
+# Support
+
+Get in touch with an Authentiq developer via [chat](https://www.authentiq.com/?utm_source=github&utm_medium=readme&utm_campaign=forgerock-social-authentiq) or [email](mailto:support@authentiq.com).
