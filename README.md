@@ -24,12 +24,18 @@ Restart the web container, after which the node will be available as an authenti
 
 To enable sign in with Authentiq:
 
-- Add the **Social Authentiq** node to an Auth Tree.  
+- Optionally, from the **Authentication -> Trees** menu, create a new Authentication Tree, e.g. `MyNewAuthTree`
+  
+  ![My New Auth Tree](./images/my-new-auth-tree.png)
+
+- Add the **Social Authentiq** node to your Auth Tree.  
 - Attach the **Provision Dynamic Account** node to the **No account exists** connector as follows.
 
   ![Authentiq Social Auth Tree Node](./images/authentiq-auth-tree-example.png)
 
-- Obtain a `client_id` and `client_secret` for your application from the [Authentiq Dashboard](https://dashboard.authentiq.com/?utm_source=github&utm_medium=readme&utm_campaign=forgerock-social-authentiq). If new to Authentiq, just press **What is Authentiq?** and type in your phone number while signing in. 
+- Sign in to the [Authentiq Dashboard](https://dashboard.authentiq.com/?utm_source=github&utm_medium=readme&utm_campaign=forgerock-social-authentiq). If new to Authentiq, just press **What is Authentiq?** and type in your phone number while signing in.
+- On the Dashboard, create a new **Server Side app** , providing a descriptive name, but leaving the remaining fields empty for now.
+- Press **Save** and copy the `client_id` and `client_secret` for your application.
 - In the **Social Authentiq** node's properties, fill out the `client_id` and `client_secret` you obtained above. You can likely leave the other fields at their defaults.
 - Save the Auth Tree.
 
@@ -43,6 +49,8 @@ To test your authentication flow:
   ![Authentiq Provider](./images/authentiq-provider.png)
 
 - Sign in with your Authentiq ID, installing it as you go if needed.
+
+- Once you know the final **Redirect URI** for your application, go back to the Authentiq Dashboard to enter it in the corresponding field (and exit setup mode).
 
 # Future
 
