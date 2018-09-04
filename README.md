@@ -50,7 +50,7 @@ To test your authentication flow:
 
 - Sign in with your Authentiq ID, installing it as you go if needed.
 
-- Once you know the final **Redirect URI** for your application, go back to the Authentiq Dashboard to enter it in the corresponding field (and exit setup mode).
+- Once you know the final **Redirect URI** for your application, go back to the Authentiq Dashboard to enter it in the corresponding field to exit setup mode.
 
 # Future
 
