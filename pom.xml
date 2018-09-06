@@ -30,7 +30,7 @@
     <artifactId>authentiq-auth-tree-social-node</artifactId>
 
     <groupId>com.authentiq</groupId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>Authentiq Social Auth Tree Node</name>
     <description>An Authentication Tree Node for using Authentiq with ForgeRock's Identity Platform</description>
 
