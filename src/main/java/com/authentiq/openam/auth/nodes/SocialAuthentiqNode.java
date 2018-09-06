@@ -49,7 +49,6 @@ import com.sun.identity.sm.RequiredValueValidator;
 @Node.Metadata(outcomeProvider = AbstractSocialAuthLoginNode.SocialAuthOutcomeProvider.class,
         configClass = SocialAuthentiqNode.AuthentiqOAuth2Config.class)
 public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
-    public static final String AUTH_ID_KEY = "sub";
     public static final Boolean USE_BASIC_AUTH = true;
 
     /**
@@ -97,6 +96,15 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
         @Attribute(order = 800)
         default String provider() {
             return "authentiq";
+        }
+
+        /**
+         * The authentication id key.
+         * @return the authentication id key.
+         */
+        @Attribute(order = 900, validators = {RequiredValueValidator.class})
+        default String authenticationIdKey() {
+            return "sub";
         }
 
         /**
@@ -220,6 +228,6 @@ public class SocialAuthentiqNode extends AbstractSocialAuthLoginNode {
                 .withUserInfoEndpoint(baseURI.resolve("/userinfo").toString())
                 .withRedirectUri(URI.create(config.redirectURI()))
                 .withProvider(config.provider())
-                .withAuthenticationIdKey(AUTH_ID_KEY).build();
+                .withAuthenticationIdKey(config.authenticationIdKey()).build();
     }
 }
