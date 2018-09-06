@@ -34,7 +34,7 @@ To enable sign in with Authentiq:
   ![Authentiq Social Auth Tree Node](./images/authentiq-auth-tree-example.png)
 
 - Sign in to the [Authentiq Dashboard](https://dashboard.authentiq.com/?utm_source=github&utm_medium=readme&utm_campaign=forgerock-social-authentiq). If new to Authentiq, just press **What is Authentiq?** and type in your phone number while signing in.
-- On the Dashboard, create a new **Server Side app** , providing a descriptive name, but leaving the remaining fields empty for now.
+- On the Dashboard, create a new **Server Side app** , providing a descriptive name in the **Client name** field, but leaving the remaining fields empty for now.
 - Press **Save** and copy the `client_id` and `client_secret` for your application.
 - In the **Social Authentiq** node's properties, fill out the `client_id` and `client_secret` you obtained above. You can likely leave the other fields at their defaults.
 - Save the Auth Tree.
