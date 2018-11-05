@@ -52,14 +52,6 @@
     <dependencies>
         <dependency>
             <groupId>org.forgerock.am</groupId>
-            <artifactId>auth-node-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.commons</groupId>
-            <artifactId>forgerock-oauth-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.forgerock.am</groupId>
             <artifactId>openam-auth-oauth2</artifactId>
         </dependency>
         <dependency>
