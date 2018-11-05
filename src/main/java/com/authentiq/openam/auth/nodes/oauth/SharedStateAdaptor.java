@@ -14,7 +14,7 @@
  * Copyright 2017 ForgeRock AS.
  */
 
-package org.forgerock.openam.auth.nodes.oauth;
+package com.authentiq.openam.auth.nodes.oauth;
 
 import org.forgerock.json.JsonValue;
 import org.forgerock.oauth.DataStore;

@@ -13,7 +13,7 @@
  *
  * Copyright 2018 ForgeRock AS.
  */
-package org.forgerock.openam.auth.nodes.oauth;
+package com.authentiq.openam.auth.nodes.oauth;
 
 import static com.iplanet.am.util.SecureRandomManager.getSecureRandom;
 import static com.sun.identity.authentication.spi.AMLoginModule.getAMIdentityRepository;

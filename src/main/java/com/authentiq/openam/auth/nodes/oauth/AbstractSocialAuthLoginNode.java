@@ -14,8 +14,11 @@
  * Copyright 2017-2018 ForgeRock AS.
  */
 
-package org.forgerock.openam.auth.nodes.oauth;
+package com.authentiq.openam.auth.nodes.oauth;
 
+import static com.authentiq.openam.auth.nodes.oauth.SocialOAuth2Helper.ATTRIBUTES_SHARED_STATE_KEY;
+import static com.authentiq.openam.auth.nodes.oauth.SocialOAuth2Helper.USER_INFO_SHARED_STATE_KEY;
+import static com.authentiq.openam.auth.nodes.oauth.SocialOAuth2Helper.USER_NAMES_SHARED_STATE_KEY;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toMap;
 import static org.forgerock.json.JsonValue.field;
@@ -24,8 +27,6 @@ import static org.forgerock.json.JsonValue.object;
 import static org.forgerock.openam.auth.node.api.Action.goTo;
 import static org.forgerock.openam.auth.node.api.Action.send;
 import static org.forgerock.openam.auth.node.api.SharedStateConstants.EMAIL_ADDRESS;
-import static org.forgerock.openam.auth.nodes.oauth.SocialOAuth2Helper.*;
-
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;

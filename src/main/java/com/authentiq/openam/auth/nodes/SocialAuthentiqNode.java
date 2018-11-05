@@ -16,10 +16,13 @@
 
 package com.authentiq.openam.auth.nodes;
 
+import static com.authentiq.openam.auth.nodes.oauth.SocialOAuth2Helper.DEFAULT_OAUTH2_SCOPE_DELIMITER;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonMap;
-import static org.forgerock.openam.auth.nodes.oauth.SocialOAuth2Helper.DEFAULT_OAUTH2_SCOPE_DELIMITER;
 
+import com.authentiq.openam.auth.nodes.oauth.AbstractSocialAuthLoginNode;
+import com.authentiq.openam.auth.nodes.oauth.ProfileNormalizer;
+import com.authentiq.openam.auth.nodes.oauth.SocialOAuth2Helper;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
@@ -34,9 +37,6 @@ import org.forgerock.oauth.clients.oauth2.OAuth2ClientConfiguration;
 import org.forgerock.openam.annotations.sm.Attribute;
 import org.forgerock.openam.auth.node.api.Node;
 import org.forgerock.openam.auth.node.api.NodeProcessException;
-import org.forgerock.openam.auth.nodes.oauth.AbstractSocialAuthLoginNode;
-import org.forgerock.openam.auth.nodes.oauth.ProfileNormalizer;
-import org.forgerock.openam.auth.nodes.oauth.SocialOAuth2Helper;
 import org.forgerock.openam.sm.annotations.adapters.Password;
 import org.forgerock.openam.sm.validation.URLValidator;
 

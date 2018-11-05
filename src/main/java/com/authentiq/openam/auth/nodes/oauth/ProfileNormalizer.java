@@ -14,7 +14,7 @@
  * Copyright 2018 ForgeRock AS.
  */
 
-package org.forgerock.openam.auth.nodes.oauth;
+package com.authentiq.openam.auth.nodes.oauth;
 
 
 import static java.util.Collections.unmodifiableMap;
